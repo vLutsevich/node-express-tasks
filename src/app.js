@@ -21,4 +21,9 @@ app.use('/', (req, res, next) => {
 
 app.use('/users', userRouter);
 
+app.use((err, req, res, next) => {
+  res.status(500).send('Something broke!');
+  next();
+});
+
 module.exports = app;
