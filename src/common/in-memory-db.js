@@ -5,23 +5,26 @@ const Task = require('../resources/tasks/task.model');
 const DB = {
   Users: [],
   Boards: [],
-  Tasks: [],
-  fixUsersStructure: user => {
-    if (user) {
-      DB.Tasks.filter(task => task).forEach(task => {
-        task.userId = task.userId === user.id ? null : task.userId;
-      });
-    }
-  },
-  fixBoardsStructure: board => {
-    if (board) {
-      DB.Tasks.filter(task => task && task.boardId === board.id).forEach(
-        task => (DB.Tasks[DB.Tasks.indexOf(task)] = undefined)
-      );
-    }
-  },
-  fixTasksStructure: () => {}
+  Tasks: []
 };
+
+// function fixUsersStructure(user) {
+//   if (user) {
+//     DB.Tasks.filter(task => task).forEach(task => {
+//       task.userId = task.userId === user.id ? null : task.userId;
+//     });
+//   }
+// }
+
+// function fixBoardsStructure(board) {
+//   if (board) {
+//     DB.Tasks.filter(task => task && task.boardId === board.id).forEach(
+//       task => (DB.Tasks[DB.Tasks.indexOf(task)] = undefined)
+//     );
+//   }
+// }
+
+// function fixTasksStructure() {}
 
 function initDB() {
   DB.Users.push(
@@ -38,7 +41,7 @@ function initDB() {
 }
 initDB();
 
-const getAllEntities = async tableName => deepCopy(DB[tableName]);
+const getAllEntities = tableName => deepCopy(DB[tableName]);
 
 const getEntity = (tableName, id) => {
   const entities = DB[tableName].filter(x => x.id === id);

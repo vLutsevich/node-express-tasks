@@ -6,28 +6,28 @@ const getAll = async () => DB.getAllEntities(TABLE_NAME);
 const get = async id => {
   const board = await DB.getEntity(TABLE_NAME, id);
   if (!board) {
-    throw Error(`The user with id ${id} was not found!`);
+    throw Error(`The board with id ${id} was not found!`);
   }
 
   return board;
 };
 
-const create = async user => DB.createEntity(TABLE_NAME, user);
+const create = async board => DB.createEntity(TABLE_NAME, board);
 
-const update = async (id, user) => {
-  const updatedUser = await DB.updateEntity(TABLE_NAME, id, user);
+const update = async (id, board) => {
+  const updatedBoard = await DB.updateEntity(TABLE_NAME, id, board);
 
-  if (!updatedUser) {
-    throw Error(`The user with id ${id} was not found!`);
+  if (!updatedBoard) {
+    throw Error(`The board with id ${id} was not found!`);
   }
 
-  return updatedUser;
+  return updatedBoard;
 };
 
 const remove = async id => {
-  const user = await DB.removeEntity(TABLE_NAME, id);
+  const board = await DB.removeEntity(TABLE_NAME, id);
 
-  if (!user) {
+  if (!board) {
     throw Error(`The user with id ${id} was not found!`);
   }
 };
