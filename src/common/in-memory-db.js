@@ -35,8 +35,8 @@ function initDB() {
   const board = new Board({ id: '11' });
   DB.Boards.push(board);
   DB.Tasks.push(
-    new Task({ boardId: board.id }),
-    new Task({ boardId: board.id })
+    new Task({ boardId: board.id, id: '111' }),
+    new Task({ boardId: board.id, id: '112' })
   );
 }
 initDB();
