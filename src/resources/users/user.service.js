@@ -6,7 +6,7 @@ const get = id => usersRepo.get(id);
 
 const create = user => usersRepo.create(user);
 
-const update = (id, userData) => usersRepo.update(id, userData);
+const update = (id, user) => usersRepo.update(id, user);
 
 const remove = id => usersRepo.remove(id);
 
