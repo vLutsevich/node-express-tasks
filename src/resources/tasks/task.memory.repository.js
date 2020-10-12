@@ -2,7 +2,7 @@ const DB = require('../../common/in-memory-db');
 const TABLE_NAME = 'Tasks';
 
 const getAll = async boardId => {
-  const a = DB.getAllEntities(TABLE_NAME);
+  const a = await DB.getAllEntities(TABLE_NAME);
   return a.filter(x => x.boardId === boardId);
 };
 

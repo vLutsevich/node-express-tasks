@@ -23,7 +23,9 @@ router.route('/').post(async (req, res) => {
 
 router.route('/:id').put(async (req, res) => {
   try {
-    const board = await boardsService.update(req.params.id, req.body);
+    const board = await boardsService.update(
+      new Board({ ...req.body, id: req.params.id })
+    );
     res.json(board);
   } catch (e) {
     res.status(404).send(e.message);

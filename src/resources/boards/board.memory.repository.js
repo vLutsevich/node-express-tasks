@@ -1,7 +1,7 @@
 const DB = require('../../common/in-memory-db');
 const TABLE_NAME = 'Boards';
 
-const getAll = async () => DB.getAllEntities(TABLE_NAME);
+const getAll = async () => await DB.getAllEntities(TABLE_NAME);
 
 const get = async id => {
   const board = await DB.getEntity(TABLE_NAME, id);
@@ -14,11 +14,11 @@ const get = async id => {
 
 const create = async board => DB.createEntity(TABLE_NAME, board);
 
-const update = async (id, board) => {
-  const updatedBoard = await DB.updateEntity(TABLE_NAME, id, board);
+const update = async board => {
+  const updatedBoard = await DB.updateEntity(TABLE_NAME, board.id, board);
 
   if (!updatedBoard) {
-    throw Error(`The board with id ${id} was not found!`);
+    throw Error(`The board with id ${board.id} was not found!`);
   }
 
   return updatedBoard;

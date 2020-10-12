@@ -28,9 +28,9 @@ function initDB() {
 }
 initDB();
 
-const getAllEntities = tableName => deepCopy(DB[tableName]);
+const getAllEntities = async tableName => deepCopy(DB[tableName]);
 
-const getEntity = (tableName, id) => {
+const getEntity = async (tableName, id) => {
   const entities = DB[tableName].filter(x => x.id === id);
 
   if (entities.length > 1) {
@@ -40,12 +40,12 @@ const getEntity = (tableName, id) => {
   return deepCopy(entities[0]);
 };
 
-const createEntity = (tableName, entity) => {
+const createEntity = async (tableName, entity) => {
   DB[tableName].push(entity);
   return getEntity(tableName, entity.id);
 };
 
-const updateEntity = (tableName, id, entity) => {
+const updateEntity = async (tableName, id, entity) => {
   const index = DB[tableName].findIndex(x => x.id === id);
   if (index > -1) {
     Object.assign(DB[tableName][index], entity);
@@ -53,7 +53,7 @@ const updateEntity = (tableName, id, entity) => {
   return getEntity(tableName, id);
 };
 
-const removeEntity = (tableName, id) => {
+const removeEntity = async (tableName, id) => {
   const entity = getEntity(tableName, id);
   const index = DB[tableName].findIndex(x => x.id === id);
   if (entity) {

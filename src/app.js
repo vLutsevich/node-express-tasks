@@ -26,7 +26,8 @@ app.use('/boards', boardRouter);
 boardRouter.use('/:boardId/tasks', taskRouter);
 
 app.use((err, req, res, next) => {
-  res.status(500).send('Something broke!');
+  console.error(err);
+  res.status(500).send(err.message);
   next();
 });
 

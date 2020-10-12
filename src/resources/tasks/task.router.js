@@ -26,11 +26,7 @@ router.route('/').post(async (req, res) => {
 router.route('/:id').put(async (req, res) => {
   try {
     const task = await taskService.update(
-      new Task({
-        ...req.body,
-        id: req.params.id,
-        boardId: req.params.boardId
-      })
+      new Task({ ...req.body, id: req.params.id, boardId: req.params.boardId })
     );
     res.json(task);
   } catch (e) {
