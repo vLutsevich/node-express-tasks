@@ -1,32 +1,32 @@
-const User = require('../resources/users/user.model');
-const Board = require('../resources/boards/board.model');
-const Task = require('../resources/tasks/task.model');
-
 const DB = {
   Users: [],
   Boards: [],
   Tasks: []
 };
 
-function initDB() {
-  DB.Users.push(
-    new User({ id: '1' }),
-    new User({ id: '2' }),
-    new User({ id: '3' })
-  );
-  const board = new Board({ id: '11' });
-  DB.Boards.push(
-    board,
-    new Board({ id: '22' }),
-    new Board({ id: '33' }),
-    new Board({ id: '44' })
-  );
-  DB.Tasks.push(
-    new Task({ boardId: board.id, id: '111' }),
-    new Task({ boardId: board.id, id: '112' })
-  );
-}
-initDB();
+// const User = require('../resources/users/user.model');
+// const Board = require('../resources/boards/board.model');
+// const Task = require('../resources/tasks/task.model');
+
+// function initDB() {
+//   DB.Users.push(
+//     new User({ id: '1' }),
+//     new User({ id: '2' }),
+//     new User({ id: '3' })
+//   );
+//   const board = new Board({ id: '11' });
+//   DB.Boards.push(
+//     board,
+//     new Board({ id: '22' }),
+//     new Board({ id: '33' }),
+//     new Board({ id: '44' })
+//   );
+//   DB.Tasks.push(
+//     new Task({ boardId: board.id, id: '111' }),
+//     new Task({ boardId: board.id, id: '112' })
+//   );
+// }
+// initDB();
 
 const getAllEntities = async tableName => deepCopy(DB[tableName]);
 
