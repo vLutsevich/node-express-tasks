@@ -8,24 +8,6 @@ const DB = {
   Tasks: []
 };
 
-// function fixUsersStructure(user) {
-//   if (user) {
-//     DB.Tasks.filter(task => task).forEach(task => {
-//       task.userId = task.userId === user.id ? null : task.userId;
-//     });
-//   }
-// }
-
-// function fixBoardsStructure(board) {
-//   if (board) {
-//     DB.Tasks.filter(task => task && task.boardId === board.id).forEach(
-//       task => (DB.Tasks[DB.Tasks.indexOf(task)] = undefined)
-//     );
-//   }
-// }
-
-// function fixTasksStructure() {}
-
 function initDB() {
   DB.Users.push(
     new User({ id: '1' }),
@@ -33,7 +15,12 @@ function initDB() {
     new User({ id: '3' })
   );
   const board = new Board({ id: '11' });
-  DB.Boards.push(board);
+  DB.Boards.push(
+    board,
+    new Board({ id: '22' }),
+    new Board({ id: '33' }),
+    new Board({ id: '44' })
+  );
   DB.Tasks.push(
     new Task({ boardId: board.id, id: '111' }),
     new Task({ boardId: board.id, id: '112' })
@@ -71,18 +58,27 @@ const removeEntity = (tableName, id) => {
   const index = DB[tableName].findIndex(x => x.id === id);
   if (entity) {
     DB[tableName].splice(index, 1);
-    // DB[`fix${tableName}Structure`](entity);
-    // const index = DB[tableName].indexOf(entity);
-    // DB[tableName] = [
-    //   ...DB[tableName].slice(0, index),
-    //   ...(DB[tableName].length > index + 1
-    //     ? DB[tableName].slice(index + 1)
-    //     : [])
-    // ];
+    if (tableName === 'Boards') {
+      deleteBoardHook(id);
+    } else if (tableName === 'Users') {
+      deleteUserHook(id);
+    }
   }
 
   return entity;
 };
+
+function deleteBoardHook(boardId) {
+  DB.Tasks = DB.Tasks.filter(task => task.boardId !== boardId);
+}
+
+function deleteUserHook(userId) {
+  DB.Tasks.forEach(task => {
+    if (task.userId === userId) {
+      task.userId = null;
+    }
+  });
+}
 
 function deepCopy(obj) {
   return JSON.parse(JSON.stringify(obj));
