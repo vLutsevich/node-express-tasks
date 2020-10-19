@@ -13,7 +13,7 @@ class NotFoundError extends Error {
 }
 
 const errorHandler = (err, req, res, next) => {
-  logger.error(`${err.message}`);
+  logger.error(`Internal error: ${err.message}`);
   if (err instanceof NotFoundError) {
     res.status(NOT_FOUND).send(err.message);
   } else if (err) {
