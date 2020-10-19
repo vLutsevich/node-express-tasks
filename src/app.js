@@ -33,18 +33,14 @@ boardRouter.use('/:boardId/tasks', taskRouter);
 app.use(errorHandler);
 
 process.on('uncaughtException', error => {
-  logger.error(`captured error: ${error.message}`);
-  logger.end();
-  logger.on('finish', () => {
-    process.exit(1); // eslint-disable-line no-process-exit
-  });
+  logger.error(`captured error: ${error.message}`, () => process.exit(1)); // eslint-disable-line no-process-exit
 });
 
 process.on('unhandledRejection', reason => {
   logger.error(`Unhandled rejection detected: ${reason.message}`);
 });
 
-// throw Error('oops');
-// Promise.reject(Error('Oops2!'));
+// throw Error('uncaughtException ocurred!');
+// Promise.reject(Error('unhandledRejection ocurred!'));
 
 module.exports = app;
