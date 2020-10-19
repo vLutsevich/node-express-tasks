@@ -81,7 +81,7 @@ function deleteUserHook(userId) {
 }
 
 function deepCopy(obj) {
-  return JSON.parse(JSON.stringify(obj));
+  return obj ? JSON.parse(JSON.stringify(obj)) : obj;
 }
 
 module.exports = {
