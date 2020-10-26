@@ -26,9 +26,7 @@ router.route('/').post(
 
 router.route('/:id').put(
   catchErrors(async (req, res) => {
-    const user = await usersService.update(
-      new User({ ...req.body, id: req.params.id })
-    );
+    const user = await usersService.update(req.params.id, req.body);
     res.json(User.toResponse(user));
   })
 );

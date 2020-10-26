@@ -12,12 +12,8 @@ router.route('/').get(
 
 router.route('/:id').get(
   catchErrors(async (req, res) => {
-    try {
-      const board = await boardsService.get(req.params.id);
-      res.json(board);
-    } catch (e) {
-      res.status(404).send(e.message);
-    }
+    const board = await boardsService.get(req.params.id);
+    res.json(board);
   })
 );
 
@@ -30,25 +26,15 @@ router.route('/').post(
 
 router.route('/:id').put(
   catchErrors(async (req, res) => {
-    try {
-      const board = await boardsService.update(
-        new Board({ ...req.body, id: req.params.id })
-      );
-      res.json(board);
-    } catch (e) {
-      res.status(404).send(e.message);
-    }
+    const board = await boardsService.update(req.params.id, req.body);
+    res.json(board);
   })
 );
 
 router.route('/:id').delete(
   catchErrors(async (req, res) => {
-    try {
-      await boardsService.remove(req.params.id);
-      res.json({});
-    } catch (e) {
-      res.status(404).send(e.message);
-    }
+    await boardsService.remove(req.params.id);
+    res.json({});
   })
 );
 
