@@ -14,8 +14,6 @@ const get = async id => {
 
 const create = async board => {
   const newBoard = await Board.create(board);
-  newBoard.id = newBoard._id;
-  await newBoard.save();
   return newBoard;
 };
 

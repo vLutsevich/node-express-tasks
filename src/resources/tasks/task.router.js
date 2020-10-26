@@ -6,14 +6,14 @@ const { catchErrors } = require('../../common/errors');
 router.route('/').get(
   catchErrors(async (req, res) => {
     const tasks = await taskService.getAll(req.params.boardId);
-    res.json(tasks);
+    res.json(tasks.map(Task.toResponse));
   })
 );
 
 router.route('/:id').get(
   catchErrors(async (req, res) => {
     const task = await taskService.get(req.params.boardId, req.params.id);
-    res.json(task);
+    res.json(Task.toResponse(task));
   })
 );
 
@@ -22,14 +22,14 @@ router.route('/').post(
     const task = await taskService.create(
       new Task({ ...req.body, boardId: req.params.boardId })
     );
-    res.json(task);
+    res.json(Task.toResponse(task));
   })
 );
 
 router.route('/:id').put(
   catchErrors(async (req, res) => {
     const task = await taskService.update(req.params.id, req.body); // boardId: req.params.boardId
-    res.json(task);
+    res.json(Task.toResponse(task));
   })
 );
 

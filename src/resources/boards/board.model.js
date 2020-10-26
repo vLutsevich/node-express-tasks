@@ -18,7 +18,6 @@ const boardSchema = new mongoose.Schema(
     title: String,
     password: String,
     columns: Array,
-    id: String,
     _id: {
       type: String,
       default: uuid
@@ -26,6 +25,11 @@ const boardSchema = new mongoose.Schema(
   },
   { versionKey: false }
 );
+
+boardSchema.statics.toResponse = board => {
+  const { id, title, password, columns } = board;
+  return { id, title, password, columns };
+};
 
 const Board = mongoose.model('Board', boardSchema);
 

@@ -17,8 +17,6 @@ const get = async (boardId, id) => {
 
 const create = async task => {
   const newTask = await Task.create(task);
-  newTask.id = newTask._id;
-  await newTask.save();
   return newTask;
 };
 
@@ -34,7 +32,7 @@ const update = async (id, task) => {
 };
 
 const remove = async id => {
-  const task = await Task.findOneAndDelete({ id });
+  const task = await Task.findOneAndDelete({ _id: id });
 
   if (!task) {
     throw new NotFoundError(
